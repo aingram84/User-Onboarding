@@ -8,12 +8,13 @@ const Form = (props) => {
         change,
         disabled,
         errors,
-      } = props
+    } = props
+
     const handleChange = (event) => {
         const { name, value, checked, type } = event.target
         const valueToUse = type === "checkbox" ? checked : value
         change(name, valueToUse)
-}
+    }
     const handleSubmit = (event) => {
         event.preventDefault();
         props.submit();
@@ -21,7 +22,12 @@ const Form = (props) => {
 
     return (
         <form onSubmit={handleSubmit}>
-
+<div className='errors'>
+                <div>{errors.first_name}</div>
+                <div>{errors.last_name}</div>
+                <div>{errors.email}</div>
+                <div>{errors.password}</div>
+            </div>
             <label>First Name
                 <input placeholder="First Name" value={props.inputValues.first_name} type="text" name="first_name" onChange={handleChange} />
             </label>
@@ -42,7 +48,7 @@ const Form = (props) => {
                     onChange={handleChange}
                 />
             </label>
-            <input type="submit" value="Submit" />
+            <input type="submit" disabled={disabled} value="Submit" />
         </form>
     )
 }
